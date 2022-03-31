@@ -1,0 +1,14 @@
+name = "SectionProperties"
+uuid = "03320fb2-42b0-43fd-9b66-b95dbaa39193"
+authors = ["Cris Moen <cris.moen@runtosolve.com>"]
+version = "0.1.0"
+
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Geometry = "c515e630-5686-4add-9a32-d2a671ea1e20"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
+UnitfulUS = "7dc9378f-8956-57ef-a780-aa31cc70ff3d"
