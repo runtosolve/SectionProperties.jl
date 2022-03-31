@@ -88,25 +88,25 @@ end
 
 #Get the node and element properties just for the flange and lip of a C or Z section.
 #This code grabs the bottom flange and lip.
-function CZflange_template(CorZ,H,Bc,Bt,Dc,Dt,r1,r2,r3,r4,θc,θt,t,nh,nb1,nb2,nd1,nd2,nr1,nr2,nr3,nr4,kipin,center)
+# function CZflange_template(CorZ,H,Bc,Bt,Dc,Dt,r1,r2,r3,r4,θc,θt,t,nh,nb1,nb2,nd1,nd2,nr1,nr2,nr3,nr4,kipin,center)
 
-    prop,node,elem,lengths,springs,constraints,geom,cz = CrossSection.CUFSMtemplate(CorZ,H,Bc,Bt,Dc,Dt,r1,r2,r3,r4,θc,θt,t,nh,nb1,nb2,nd1,nd2,nr1,nr2,nr3,nr4,kipin,center)
+#     prop,node,elem,lengths,springs,constraints,geom,cz = CrossSection.CUFSMtemplate(CorZ,H,Bc,Bt,Dc,Dt,r1,r2,r3,r4,θc,θt,t,nh,nb1,nb2,nd1,nd2,nr1,nr2,nr3,nr4,kipin,center)
 
-    if CorZ == 2
-        node[:, 2] = -node[:, 2]
-    end
+#     if CorZ == 2
+#         node[:, 2] = -node[:, 2]
+#     end
 
-    index_xo = findall(x-> x==0.0, node[:, 2])
-    index_yo = findall(y-> y==0.0, node[:, 3])
-    index_o = intersect(index_xo, index_yo)
-    index = 1:(index_o[1]+1)
+#     index_xo = findall(x-> x==0.0, node[:, 2])
+#     index_yo = findall(y-> y==0.0, node[:, 3])
+#     index_o = intersect(index_xo, index_yo)
+#     index = 1:(index_o[1]+1)
 
-	nodeflange = node[index,:]
-    elemflange = elem[index[1:end-1],:]
+# 	nodeflange = node[index,:]
+#     elemflange = elem[index[1:end-1],:]
 
-    return nodeflange, elemflange
+#     return nodeflange, elemflange
 
-end
+# end
 
 
 """
@@ -469,10 +469,10 @@ function get_xy_coordinates(feature)
     xcoords_straight, ycoords_straight = Geometry.line_coordinates(Δxy, feature.closed_or_open)
 
     #calculate feature surface normals
-    unitnormals = CrossSection.surface_normals(xcoords_straight, ycoords_straight, feature.closed_or_open)
+    unitnormals = surface_normals(xcoords_straight, ycoords_straight, feature.closed_or_open)
 
     #calculate feature node normals
-    nodenormals = CrossSection.avg_node_normals(unitnormals, feature.closed_or_open)
+    nodenormals = avg_node_normals(unitnormals, feature.closed_or_open)
 
     #calculate interior corner angle magnitudes
     num_radius = length(feature.radius)
@@ -682,46 +682,46 @@ end
 # end
 
 
-function triangular_mesh_properties(mesh)
+# function triangular_mesh_properties(mesh)
 
-    #calculate cell area and centroid
-    Ai = zeros(Float64, mesh.n_cell)
-    cxi = zeros(Float64, mesh.n_cell)
-    cyi = zeros(Float64, mesh.n_cell)
+#     #calculate cell area and centroid
+#     Ai = zeros(Float64, mesh.n_cell)
+#     cxi = zeros(Float64, mesh.n_cell)
+#     cyi = zeros(Float64, mesh.n_cell)
 
-    for i = 1:mesh.n_cell
+#     for i = 1:mesh.n_cell
 
-        p1 = mesh.cell[1, i]
-        p2 = mesh.cell[2, i]
-        p3 = mesh.cell[3, i]
+#         p1 = mesh.cell[1, i]
+#         p2 = mesh.cell[2, i]
+#         p3 = mesh.cell[3, i]
 
-        x1 = mesh.point[1, p1]
-        y1 = mesh.point[2,p1]
-        x2 = mesh.point[1, p2]
-        y2 = mesh.point[2,p2]
-        x3 = mesh.point[1, p3]
-        y3 = mesh.point[2,p3]
+#         x1 = mesh.point[1, p1]
+#         y1 = mesh.point[2,p1]
+#         x2 = mesh.point[1, p2]
+#         y2 = mesh.point[2,p2]
+#         x3 = mesh.point[1, p3]
+#         y3 = mesh.point[2,p3]
 
-    Ai[i] = Geometry.triangle_area(x1, y1, x2, y2, x3, y3)
+#     Ai[i] = Geometry.triangle_area(x1, y1, x2, y2, x3, y3)
 
-    cxi[i], cyi[i] = Geometry.triangle_centroid(x1, y1, x2, y2, x3, y3)
+#     cxi[i], cyi[i] = Geometry.triangle_centroid(x1, y1, x2, y2, x3, y3)
 
-    end
+#     end
 
-    return Ai, cxi, cyi
+#     return Ai, cxi, cyi
 
-end
+# end
 
 
 
-function mesh(xcoords, ycoords, mesh_size)
+# function mesh(xcoords, ycoords, mesh_size)
 
-    section_mesh = CrossSection.triangular_mesh(xcoords, ycoords, mesh_size)
-    Ai, cxi, cyi = CrossSection.triangular_mesh_properties(section_mesh)
+#     section_mesh = CrossSection.triangular_mesh(xcoords, ycoords, mesh_size)
+#     Ai, cxi, cyi = CrossSection.triangular_mesh_properties(section_mesh)
 
-    return Ai, cxi, cyi
+#     return Ai, cxi, cyi
 
- end
+#  end
 
 
  function rectangular_tube_geometry(feature)
@@ -740,10 +740,10 @@ function mesh(xcoords, ycoords, mesh_size)
     xcoords_straight, ycoords_straight = Geometry.line_coordinates(Δxy, feature.closed_or_open)
 
     #calculate feature surface normals
-    unitnormals = CrossSection.surface_normals(xcoords_straight, ycoords_straight, feature.closed_or_open)
+    unitnormals = surface_normals(xcoords_straight, ycoords_straight, feature.closed_or_open)
 
     #calculate feature node normals
-    nodenormals = CrossSection.avg_node_normals(unitnormals, feature.closed_or_open)
+    nodenormals = avg_node_normals(unitnormals, feature.closed_or_open)
 
     #calculate interior corner angle magnitudes
     num_radius = length(feature.radius)
@@ -1286,12 +1286,12 @@ function generate_cross_section_outer_inner_mid_nodes(outer_surface_object, t, c
     if closed_or_open == 1
 
         #Calculate the outward (up) facing surface coordinates.
-        xcoords_top, ycoords_top = CrossSection.get_xy_coordinates(outer_surface_object)
+        xcoords_top, ycoords_top = get_xy_coordinates(outer_surface_object)
 
     elseif closed_or_open == 0   #only works for rectangular closed tubes right now
 
         #Calculate the out-to-out tube surface coordinates.
-        xcoords_top, ycoords_top = CrossSection.rectangular_tube_geometry(outer_surface_object)
+        xcoords_top, ycoords_top = rectangular_tube_geometry(outer_surface_object)
 
     end
 
@@ -1300,14 +1300,14 @@ function generate_cross_section_outer_inner_mid_nodes(outer_surface_object, t, c
 
 
     #Calculate element normals.
-    unitnormals = CrossSection.surface_normals(xcoords_top, ycoords_top, closed_or_open)
-    nodenormals = CrossSection.avg_node_normals(unitnormals, closed_or_open)
+    unitnormals = surface_normals(xcoords_top, ycoords_top, closed_or_open)
+    nodenormals = avg_node_normals(unitnormals, closed_or_open)
 
     #Calculate the midline coordinates.
-    xcoords_mid, ycoords_mid = CrossSection.xycoords_along_normal(xcoords_top, ycoords_top, nodenormals, -t/2)
+    xcoords_mid, ycoords_mid = xycoords_along_normal(xcoords_top, ycoords_top, nodenormals, -t/2)
 
     #Calculate inward (down) facing surface coordinates.
-    xcoords_bottom, ycoords_bottom = CrossSection.xycoords_along_normal(xcoords_top, ycoords_top, nodenormals, -t)
+    xcoords_bottom, ycoords_bottom = xycoords_along_normal(xcoords_top, ycoords_top, nodenormals, -t)
 
     coords_top = (x=xcoords_top, y=ycoords_top)
 
