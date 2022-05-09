@@ -1,5 +1,7 @@
 module Tools
 
+using Statistics
+using LinearAlgebra
 
 
 function calculate_axis_area(element_connectivity, element_thicknesses, node_geometry, axis_location, about_axis)
