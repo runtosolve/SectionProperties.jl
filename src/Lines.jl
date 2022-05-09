@@ -109,3 +109,5 @@ function calculate_plastic_section_properties(node_geometry, element_definitions
     return plastic_section_properties
 
 end
+
+end
