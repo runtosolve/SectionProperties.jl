@@ -1,5 +1,8 @@
 module Lines
 
+using Statistics
+using LinearAlgebra
+
 using ..Tools 
 
 struct PlasticSectionProperties
