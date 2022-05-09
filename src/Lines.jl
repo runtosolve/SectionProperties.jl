@@ -31,7 +31,7 @@ function calculate_plastic_neutral_axis_location(element_connectivity, element_t
         axis_location = axis_iterator[i]
 
         #Define an array of all the element areas.
-        A_elements = calculate_axis_area(element_connectivity, element_thicknesses, node_geometry, axis_location, about_axis)
+        A_elements = Tools.calculate_axis_area(element_connectivity, element_thicknesses, node_geometry, axis_location, about_axis)
 
         sum_A_elements[i] = sum(A_elements)
 
