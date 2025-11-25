@@ -37,6 +37,28 @@ mutable struct SectionPropertiesObject
 end
 
 
+mutable struct SectionPropertiesClosedObject
+
+    node_geometry::Array{Float64, 2}
+    element_info::Array{Float64, 2}
+    A::Float64
+    xc::Float64
+    yc::Float64
+    Ixx::Float64
+    Iyy::Float64
+    Ixy::Float64
+    θ::Float64
+    I1::Float64
+    I2::Float64
+    J::Float64
+    xs::Float64
+    ys::Float64
+
+end
+
+
+
+
 
 function cutwp_prop2(coord,ends)
 
@@ -517,7 +539,18 @@ function cutwp_prop2(coord,ends)
     
         end
     
-        section_properties = SectionPropertiesObject(coord,ends,A,xc,yc,Ix,Iy,Ixy,theta,I1,I2,J,xs,ys,Cw,B1,B2,wn)
+        if section == "open"
+
+            section_properties = SectionPropertiesObject(coord,ends,A,xc,yc,Ix,Iy,Ixy,theta,I1,I2,J,xs,ys,Cw,B1,B2,wn)
+
+        elseif section == "close"
+
+            xs = xc #not fully general
+            ys = yc #not fully general 
+            section_properties = SectionPropertiesClosedObject(coord,ends,A,xc,yc,Ix,Iy,Ixy,theta,I1,I2,J,xs,ys)
+
+        end
+
     
         return section_properties
     

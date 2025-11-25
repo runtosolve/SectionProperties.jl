@@ -1,0 +1,7 @@
+[deps]
+RackSections = "21e8d1f3-9943-42c4-bedf-2d5458fed8e1"
+SectionProperties = "03320fb2-42b0-43fd-9b66-b95dbaa39193"
+
+[sources]
+RackSections = {path = "/Users/crismoen/.julia/dev/RackSections"}
+SectionProperties = {path = "/Users/crismoen/.julia/dev/SectionProperties"}
