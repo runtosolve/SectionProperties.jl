@@ -600,23 +600,23 @@ function open_thin_walled(X_c, Y_c, t)
 
 end
 
-function open_thin_walled(X_c, Y_c, t)
+# function open_thin_walled(X_c, Y_c, t)
 
-    # X_c = [center[i][1] for i in eachindex(center)]
-    # Y_c = [center[i][2] for i in eachindex(center)]
+#     # X_c = [center[i][1] for i in eachindex(center)]
+#     # Y_c = [center[i][2] for i in eachindex(center)]
 
-    #define elements for section property calc
-    num_nodes = length(X_c)
-    num_elem = num_nodes - 1
-    coord = [X_c Y_c]
-    ends = [1:num_nodes-1 2:num_nodes t]
+#     #define elements for section property calc
+#     num_nodes = length(X_c)
+#     num_elem = num_nodes - 1
+#     coord = [X_c Y_c]
+#     ends = [1:num_nodes-1 2:num_nodes t]
 
-    #calculate section properties
-    section_properties = cutwp_prop2(coord,ends)
+#     #calculate section properties
+#     section_properties = cutwp_prop2(coord,ends)
 
-    return section_properties
+#     return section_properties
 
-end
+# end
 
 
 function closed_thin_walled(center, t)
